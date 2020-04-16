@@ -149,9 +149,23 @@ namespace Snapper
         /// <param name="y">The new y position of the top left hand corner.</param>
         /// <param name="width">The new width of the window.</param>
         /// <param name="height">The new height of the window.</param>
+        /// <param name="async">Whether the resize should be done asynchronously or not.</param>
+        private void SetWindowPosition(IntPtr window, int x, int y, int width, int height, bool async)
+        {
+            Native.SetWindowPos(window, IntPtr.Zero, x, y, width, height, Native.SWP_NOCOPYBITS | (async ? Native.SWP_ASYNCWINDOWPOS : 0x0));
+        }
+
+        /// <summary>
+        /// Set the position and size of a window.
+        /// </summary>
+        /// <param name="window">HWND handle of the window to set the position of.</param>
+        /// <param name="x">The new x position of the top left hand corner.</param>
+        /// <param name="y">The new y position of the top left hand corner.</param>
+        /// <param name="width">The new width of the window.</param>
+        /// <param name="height">The new height of the window.</param>
         private void SetWindowPosition(IntPtr window, int x, int y, int width, int height)
         {
-            Native.SetWindowPos(window, IntPtr.Zero, x, y, width, height, Native.SWP_ASYNCWINDOWPOS | Native.SWP_NOCOPYBITS);
+            SetWindowPosition(window, x, y, width, height, false);
         }
 
         /// <summary>
@@ -176,6 +190,17 @@ namespace Snapper
 
             // Move window.
             SetWindowPosition(focussedWindow, newWindowTopLeftCornerX, newWindowTopLeftCornerY, newWindowWidth, newWindowHeight);
+
+            Native.POINT actualBottomPosition = new Native.POINT(newWindowTopLeftCornerX, newWindowTopLeftCornerY + newWindowHeight);
+            Native.ScreenToClient(focussedWindow, ref actualBottomPosition);
+
+            // Some applications have more complex borders, this second check catches that and resizes the window again.
+            if (actualBottomPosition.Y != newWindowHeight)
+            {
+                newWindowHeight = actualBottomPosition.Y;
+
+                SetWindowPosition(focussedWindow, newWindowTopLeftCornerX, newWindowTopLeftCornerY, newWindowWidth, newWindowHeight, true);
+            }
         }
 
         /// <summary>
@@ -200,6 +225,17 @@ namespace Snapper
 
             // Move window.
             SetWindowPosition(focussedWindow, newWindowTopLeftCornerX, newWindowTopLeftCornerY, newWindowWidth, newWindowHeight);
+
+            Native.POINT actualBottomPosition = new Native.POINT(newWindowTopLeftCornerX, newWindowTopLeftCornerY + newWindowHeight);
+            Native.ScreenToClient(focussedWindow, ref actualBottomPosition);
+
+            // Some applications have more complex borders, this second check catches that and resizes the window again.
+            if (actualBottomPosition.Y != newWindowHeight)
+            {
+                newWindowHeight = actualBottomPosition.Y;
+
+                SetWindowPosition(focussedWindow, newWindowTopLeftCornerX, newWindowTopLeftCornerY, newWindowWidth, newWindowHeight, true);
+            }
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace Snapper
     /// </summary>
     public static class Native
     {
+        [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
             public int Left, Top, Right, Bottom;
@@ -105,6 +106,35 @@ namespace Snapper
             }
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+
+            public POINT(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+
+            public static implicit operator System.Drawing.Point(POINT p)
+            {
+                return new System.Drawing.Point(p.X, p.Y);
+            }
+
+            public static implicit operator POINT(System.Drawing.Point p)
+            {
+                return new POINT(p.X, p.Y);
+            }
+
+            public override string ToString()
+            {
+                return string.Format(System.Globalization.CultureInfo.CurrentCulture, "{{X={0},Y={1}}}", X, Y);
+            }
+        }
+
+
         // Not all SWP_* values are here as we only need a few of them.
         public const uint SWP_ASYNCWINDOWPOS = 0x4000;
         public const uint SWP_NOCOPYBITS = 0x0100;
@@ -134,5 +164,9 @@ namespace Snapper
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll")]
+        public static extern bool ScreenToClient(IntPtr hWnd, ref POINT lpPoint);
     }
 }

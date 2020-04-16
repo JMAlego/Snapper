@@ -1,3 +1,5 @@
+<img style="float: left;" alt="Image of a Magnet" src="./Resources/magnet.png" width="100">
+
 # Snapper!
 
 _Make windows snappier!_

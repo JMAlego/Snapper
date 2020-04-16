@@ -105,11 +105,11 @@ namespace Snapper
             }
         }
 
+        // Not all SWP_* values are here as we only need a few of them.
         public const uint SWP_ASYNCWINDOWPOS = 0x4000;
         public const uint SWP_NOCOPYBITS = 0x0100;
 
-        public const int SM_CXBORDER = 5;
-
+        // Same for WM_* values as above.
         public const int WM_HOTKEY = 0x0312;
 
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -127,9 +127,7 @@ namespace Snapper
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int GetSystemMetrics(int nIndex);
-
+        [return: MarshalAs(UnmanagedType.Bool)]
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
 

@@ -114,7 +114,7 @@
             this.labelInstructions.Name = "labelInstructions";
             this.labelInstructions.Size = new System.Drawing.Size(335, 40);
             this.labelInstructions.TabIndex = 2;
-            this.labelInstructions.Text = "Super+Alt+Up to snap window top.\r\nSuper+Alt+Down to snap window to bottom.";
+            this.labelInstructions.Text = "Super+Alt+Up to snap window to top.\r\nSuper+Alt+Down to snap window to bottom.";
             this.labelInstructions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelCredits
@@ -125,8 +125,8 @@
             this.labelCredits.Name = "labelCredits";
             this.labelCredits.Size = new System.Drawing.Size(335, 27);
             this.labelCredits.TabIndex = 3;
-            this.labelCredits.Text = "Made by Jacob Allen <polyomino.xyz>\r\nIcon lineart made by Freepik from www.flatic" +
-    "on.com";
+            this.labelCredits.Text = "Made by Jacob Allen <polyomino.xyz>\r\nIcon line art made by Freepik from www.flati" +
+    "con.com";
             this.labelCredits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm

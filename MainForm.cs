@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Snapper
@@ -21,7 +22,8 @@ namespace Snapper
         private readonly int BOTTOM_HOTKEY_KEY = Keys.Down.GetHashCode();
         private const int BOTTOM_HOTKEY_ID = 1;
 
-        private readonly int NATIVE_BORDER = Native.GetSystemMetrics(Native.SM_CXBORDER);
+        private Mutex singletonMutex = new Mutex(false, "polyomino.xyz Snapper SingletonApplicationWarning");
+        private bool aquiredSingletonMutex = false;
 
         /// <summary>
         /// Register hotkeys with the system.
@@ -48,9 +50,24 @@ namespace Snapper
         {
             InitializeComponent();
 
-            RegisterKeys();
-
+            SingletonCheck();
             HandleFirstLaunch();
+            RegisterKeys();
+        }
+
+        /// <summary>
+        /// Ensure that only one copy of the application is running at a time.
+        /// </summary>
+        private void SingletonCheck()
+        {
+            if (singletonMutex.WaitOne(TimeSpan.Zero))
+            {
+                aquiredSingletonMutex = true;
+            }
+            else
+            {
+                MessageBox.Show("Only one instance of this application should really be running at a time.", "This application is already running!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
@@ -58,8 +75,19 @@ namespace Snapper
         /// </summary>
         private void HandleFirstLaunch()
         {
+            // If settings require an upgrade, as detailed by the "Upgrade Required" settings:
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                // Do upgrade, and then save.
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
+            // If this is the first launch of the application:
             if (Properties.Settings.Default.FirstLaunch)
             {
+                // Display a helpful message box to tell people it's in their tray.
                 MessageBox.Show("Snapper! is running in the background.\r\n" +
                                 "You can open it from your system tray.\r\n" +
                                 "(You won't see this message again.)", "Snapper! is running in the background.",
@@ -229,6 +257,8 @@ namespace Snapper
         {
             // Clean up hotkey registration.
             UnRegisterKeys();
+            if (aquiredSingletonMutex)
+                singletonMutex.ReleaseMutex();
         }
 
         /// <summary>

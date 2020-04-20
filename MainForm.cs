@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -52,7 +53,16 @@ namespace Snapper
 
             SingletonCheck();
             HandleFirstLaunch();
+            SetVersionText();
             RegisterKeys();
+        }
+
+        /// <summary>
+        /// Set the version label to the assembly version before display.
+        /// </summary>
+        private void SetVersionText()
+        {
+            lblVersion.Text = Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
 
         /// <summary>

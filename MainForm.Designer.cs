@@ -39,6 +39,7 @@
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelInstructions = new System.Windows.Forms.Label();
             this.labelCredits = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.contextMenuStripTray.SuspendLayout();
             this.SuspendLayout();
@@ -129,11 +130,22 @@
     "con.com";
             this.labelCredits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblVersion.Location = new System.Drawing.Point(12, 9);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(0, 13);
+            this.lblVersion.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 361);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.labelCredits);
             this.Controls.Add(this.labelInstructions);
             this.Controls.Add(this.labelName);
@@ -152,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             this.contextMenuStripTray.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -165,6 +178,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripTray;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
 

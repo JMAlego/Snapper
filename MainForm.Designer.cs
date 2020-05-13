@@ -40,6 +40,7 @@
             this.labelInstructions = new System.Windows.Forms.Label();
             this.labelCredits = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.contextMenuStripTray.SuspendLayout();
             this.SuspendLayout();
@@ -69,9 +70,11 @@
             // 
             this.contextMenuStripTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showToolStripMenuItem,
+            this.toolStripSeparator1,
             this.quitToolStripMenuItem});
             this.contextMenuStripTray.Name = "contextMenuStripTray";
-            this.contextMenuStripTray.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStripTray.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStripTray.Size = new System.Drawing.Size(104, 54);
             // 
             // showToolStripMenuItem
             // 
@@ -140,6 +143,11 @@
             this.lblVersion.Size = new System.Drawing.Size(0, 13);
             this.lblVersion.TabIndex = 4;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +187,7 @@
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

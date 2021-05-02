@@ -139,6 +139,9 @@ namespace Snapper
         public const uint SWP_ASYNCWINDOWPOS = 0x4000;
         public const uint SWP_NOCOPYBITS = 0x0100;
 
+        // Same for SW_* values as above.
+        public const int SW_RESTORE = 9;
+
         // Same for WM_* values as above.
         public const int WM_HOTKEY = 0x0312;
 
@@ -168,5 +171,9 @@ namespace Snapper
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll")]
         public static extern bool ScreenToClient(IntPtr hWnd, ref POINT lpPoint);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     }
 }

@@ -187,6 +187,10 @@ namespace Snapper
             IntPtr focussedWindow = Native.GetForegroundWindow();
             Screen windowScreen = Screen.FromHandle(focussedWindow);
 
+            // Windows gets confused if you move a maximised window, interestingly breaking the maximise button.
+            // To avoid any such issues we restore the window before moving it.
+            Native.ShowWindow(focussedWindow, Native.SW_RESTORE);
+
             // Get window x border.
             int windowBorderX = GetWindowXBorder(focussedWindow);
 
@@ -221,6 +225,10 @@ namespace Snapper
             // Get current window and the screen it's on.
             IntPtr focussedWindow = Native.GetForegroundWindow();
             Screen windowScreen = Screen.FromHandle(focussedWindow);
+
+            // Windows gets confused if you move a maximised window, interestingly breaking the maximise button.
+            // To avoid any such issues we restore the window before moving it.
+            Native.ShowWindow(focussedWindow, Native.SW_RESTORE);
 
             // Get window x border.
             int windowBorderX = GetWindowXBorder(focussedWindow);
